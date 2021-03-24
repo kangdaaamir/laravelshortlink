@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ShortLink;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
 
 class ShortLinkController extends Controller
 {
@@ -64,7 +65,9 @@ class ShortLinkController extends Controller
     public function shortenLink($code)
     {
         $find = ShortLink::where('code', $code)->first();
-   
-        return redirect($find->link);
+
+        $url = 'http://'.$find->link;
+
+        return Redirect::to($url);
     }
 }
