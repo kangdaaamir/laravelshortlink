@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('content')
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
+  <a href="{{ route('generate.shorten.index') }}" class="orangeBtn mt-3 mt-md-0 backBtn" title="Back"><i class="fal fa-angle-left"></i> Back</a>
+</div>
 
 <div class="card">
   <div class="card-header">

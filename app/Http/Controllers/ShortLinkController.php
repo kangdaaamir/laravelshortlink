@@ -42,7 +42,10 @@ class ShortLinkController extends Controller
     public function store(Request $request)
     {
     	$this->validate($request, [
-            'link' => 'required|unique:short_links,link',
+            'link' => 'required|unique:short_links,link|url',
+        ],[
+            'link.url'=>'Please Enter Proper URL Like http://www.example.com OR https://www.example.com'
+
         ]);
 
    
@@ -66,8 +69,10 @@ class ShortLinkController extends Controller
     {
         $find = ShortLink::where('code', $code)->first();
 
-        $url = 'http://'.$find->link;
+        $input['click_count'] = $find->click_count + 1;
 
-        return Redirect::to($url);
+        $find->update($input);
+
+        return Redirect::to($find->link);
     }
 }
